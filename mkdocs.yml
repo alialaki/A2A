@@ -1,9 +1,16 @@
 # Project information
-site_name: Agent2Agent Protocol (A2A)
-site_url: https://google.github.io/A2A/
+site_name: Agent2Agent (A2A) Protocol
+site_url: https://a2a-protocol.org/
 site_description: >-
   An open protocol enabling communication and interoperability between opaque agentic applications.
 site_dir: site
+
+extra:
+  a2a_version: !ENV [MIKE_VERSION, 'dev']
+  analytics:
+    provider: google
+    property: G-RB39M83WHB
+
 
 # Navigation
 nav:
@@ -15,9 +22,13 @@ nav:
     - Agent Discovery: topics/agent-discovery.md
     - Enterprise-Ready Features: topics/enterprise-ready.md
     - Streaming & Asynchronous Operations: topics/streaming-and-async.md
+    - Extensions: topics/extensions.md
+    - Life of a Task: topics/life-of-a-task.md
   - Specification: specification.md
   - Community: community.md
   - Partners: partners.md
+  - SDK Reference:
+    - Python: sdk/python/api/index.html
   - Tutorial (Python):
     - Introduction: tutorials/python/1-introduction.md
     - Setup: tutorials/python/2-setup.md
@@ -27,10 +38,11 @@ nav:
     - Interact with Server: tutorials/python/6-interact-with-server.md
     - Streaming & Multiturn: tutorials/python/7-streaming-and-multiturn.md
     - Next Steps: tutorials/python/8-next-steps.md
+  - Roadmap: roadmap.md
 
 # Repository
-repo_name: google/A2A
-repo_url: https://github.com/google/A2A
+repo_name: a2aproject/A2A
+repo_url: https://github.com/a2aproject/A2A
 
 # Copyright
 copyright: Copyright Google 2025
@@ -42,6 +54,7 @@ extra_css:
 # Configuration
 theme:
   name: material
+  custom_dir: .mkdocs/overrides
   font:
     text: Google Sans
     code: Roboto Mono
@@ -49,6 +62,19 @@ theme:
   favicon: assets/a2a-logo-black.svg
   icon:
     repo: fontawesome/brands/github
+    admonition:
+      note: fontawesome/solid/note-sticky
+      abstract: fontawesome/solid/book
+      info: fontawesome/solid/circle-info
+      tip: fontawesome/solid/bullhorn
+      success: fontawesome/solid/check
+      question: fontawesome/solid/circle-question
+      warning: fontawesome/solid/triangle-exclamation
+      failure: fontawesome/solid/bomb
+      danger: fontawesome/solid/skull
+      bug: fontawesome/solid/robot
+      example: fontawesome/solid/flask
+      quote: fontawesome/solid/quote-left
   palette:
     - scheme: default
       primary: indigo
@@ -63,6 +89,7 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
+    - announce.dismiss
     - content.code.annotate
     - content.code.copy
     - content.code.select
@@ -77,9 +104,12 @@ theme:
     - navigation.top
     - navigation.tracking
     - toc.follow
+    - versioning:
+        provider: mike
 
 # Extensions
 markdown_extensions:
+  - footnotes
   - admonition
   - attr_list
   - md_in_html
@@ -92,7 +122,9 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      url_download: true
+      dedent_subsections: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -109,9 +141,10 @@ markdown_extensions:
 # Plugins
 plugins:
   - search
+  - macros
   - redirects:
       redirect_maps:
-        "spec-json.md": https://raw.githubusercontent.com/google/A2A/refs/heads/main/specification/json/a2a.json
+        "spec-json.md": https://raw.githubusercontent.com/a2aproject/A2A/refs/heads/main/specification/json/a2a.json
         "specification/overview.md": "specification.md"
         "specification/agent-card.md": "specification.md#5-agent-discovery-the-agent-card"
         "specification/agent-to-agent-communication.md": "specification.md#6-protocol-data-objects"
@@ -126,6 +159,7 @@ plugins:
         "specification/topics/push_notification.md": "topics/streaming-and-async.md"
         "specification/topics/push_notifications.md": "topics/streaming-and-async.md"
         "topics/index.md": "topics/what-is-a2a.md"
+        "topics/roadmap.md": "roadmap.md"
         # Tutorial
         "tutorials/index.md": "tutorials/python/1-introduction.md"
         "tutorials/python/index.md": "tutorials/python/1-introduction.md"
@@ -138,3 +172,4 @@ plugins:
         "tutorials/python/8-agent-capabilities.md": "tutorials/python/7-streaming-and-multiturn.md"
         "tutorials/python/9-ollama-agent.md": "tutorials/python/7-streaming-and-multiturn.md"
         "tutorials/python/10-next-steps.md": "tutorials/python/8-next-steps.md"
+        "sdk/python/": "sdk/python/api/index.html"

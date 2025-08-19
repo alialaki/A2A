@@ -131,6 +131,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+.ruff_cache/
 
 # Pyre type checker
 .pyre/
@@ -179,3 +180,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Sphinx build artifacts
+docs/sdk/python/_build/
+docs/sdk/python/api/
+docs/sdk/python/generated/
